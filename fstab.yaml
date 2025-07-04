@@ -1,6 +1,6 @@
 mountpoints:
   /:
-    url: https://drive.google.com/drive/folders/1UzsNSS6F_Uk4eXw-FjGh6FbAMoZ1XGgV?usp=drive_link    
+    url: https://content.da.live/hieu-luu-niteco/aemshop-demo/
     type: markup
 
 folders:
