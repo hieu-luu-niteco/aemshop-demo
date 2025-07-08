@@ -1,5 +1,28 @@
 {
   "project": "My Project",
   "editUrlLabel": "Document Authoring",
-  "editUrlPattern": "https://da.live/edit#/hieu-luu-niteco/aemshop-demo"
+  "editUrlPattern": "https://da.live/edit#/hieu-luu-niteco/aemshop-demo",
+  "plugins": [
+    {
+      "id": "library",
+      "title": "Blocks AEM Library",
+      "environments": [
+        "edit"
+      ],
+      "url": "/tools/sidekick/library.html",      
+      "includePaths": [
+        "**.docx**"
+      ]
+    },
+    {
+      "containerId": "tools",
+      "id": "youtube",
+      "title": "YouTube",
+      "environments": [
+        "edit", "dev", "preview", "live", "prod"
+      ],
+      "url": "https://www.youtube.com/@AEMGeeks",      
+      "passReferrer": true
+    }
+  ]
 }
