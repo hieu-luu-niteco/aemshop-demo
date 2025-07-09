@@ -39,7 +39,7 @@
       ],
       "url": "https://google.com?search=aem+geeks",
       "passReferrer": true, 
-      "passConfig": true,
+      "passConfig": false,
       "excludePaths": [
         "/fr/**.docx**"
       ],
