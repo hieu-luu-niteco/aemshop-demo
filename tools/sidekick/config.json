@@ -32,12 +32,12 @@
     },
     {
       "containerId": "tools",
-      "id": "YouTube",
-      "title": "YouTube",
+      "id": "goolge-search",
+      "title": "Google Search",
       "environments": [
         "edit", "dev", "preview", "live", "prod"
       ],
-      "url": "https://youtube.com?search=aem+geeks",
+      "url": "https://google.com?search=aem+geeks",
       "passReferrer": true, 
       "passConfig": true,
       "excludePaths": [
