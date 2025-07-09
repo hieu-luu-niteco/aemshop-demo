@@ -353,7 +353,8 @@ export function applyTemplates(doc) {
  */
 export async function fetchPlaceholders(path) {
   const rootPath = getRootPath();
-  const fallback = getMetadata('placeholders');
+  const fallback = getMetadata('placeholders');  
+
   window.placeholders = window.placeholders || {};
 
   // Track pending requests to prevent duplicate fetches
@@ -397,7 +398,7 @@ export async function fetchPlaceholders(path) {
       }
 
       // Create new fetch promise
-      const resourceFetchPromise = fetch(`${url}?sheet=data`).then(async (response) => {
+      const resourceFetchPromise = fetch(`${url}`).then(async (response) => {
         if (response.ok) {
           const data = await response.json();
           // Cache the response
