@@ -1,8 +1,8 @@
 {
   "public": {
     "default": {
-      "commerce-core-endpoint": "https://na1-sandbox.api.commerce.adobe.com/9yzxjnNzPFCojFzULU4N5d/graphql",
-      "commerce-endpoint": "https://na1-sandbox.api.commerce.adobe.com/9yzxjnNzPFCojFzULU4N5d/graphql",
+      "commerce-core-endpoint": "https://na1-sandbox.api.commerce.adobe.com/Bang1dSzsvNwaEnTudtw2G/graphql",
+      "commerce-endpoint": "https://na1-sandbox.api.commerce.adobe.com/Bang1dSzsvNwaEnTudtw2G/v1/catalog",
       "headers": {
         "all": {
           "Store": "default"
