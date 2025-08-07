@@ -108,15 +108,16 @@ export default async function decorate(block) {
     }
 
     const storeViewCode = getConfigValue('headers.cs.Magento-Store-View-Code');
+    console.log('storeViewCode', storeViewCode);
     const getProductLink = (item) => rootLink(`/products/${item.urlKey}/${item.sku}`);
 
     // Get product view history
-    context.userViewHistory = getProductViewHistory(storeViewCode);
+    context.userViewHistory = getProductViewHistory(storeViewCode);    
 
     // Get purchase history
     context.userPurchaseHistory = getPurchaseHistory(storeViewCode);
 
-    try {
+    try {      
       await Promise.all([
         provider.render(ProductList, {
           routeProduct: getProductLink,

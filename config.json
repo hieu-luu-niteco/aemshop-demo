@@ -14,6 +14,10 @@
           "Magento-Website-Code": "base",
           "x-api-key": "4dfa19c9fe6f4cccade55cc5b3da94f7",
           "Magento-Environment-Id": "9yzxjnNzPFCojFzULU4N5d"
+        },
+        "custom": {
+          "Access-Control-Allow-Origin": "https://da.live.com",
+          "Access-Control-Allow-Methods": "GET, OPTIONS, POST"
         }
       },
       "plugins": {
