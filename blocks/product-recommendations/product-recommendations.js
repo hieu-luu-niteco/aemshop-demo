@@ -62,6 +62,8 @@ export default async function decorate(block) {
   // Configuration
   const { currentsku, recid } = readBlockConfig(block);
 
+  console.log('recId', recid);
+
   // Layout
   const fragment = document.createRange().createContextualFragment(`
     <div class="recommendations__wrapper">

@@ -8,6 +8,9 @@ function prepareIds(providedIds) {
 }
 
 export default async function decorate(block) {
+
+  console.log("This is from targeted-block.js");
+
   const blockConfig = readBlockConfig(block);
 
   const {
@@ -17,6 +20,8 @@ export default async function decorate(block) {
     'customer-groups': customerGroups,
     'cart-rules': rules,
   } = blockConfig;
+
+  console.log("block Children", block.children);
 
   const content = (blockConfig.fragment !== undefined)
     ? await loadFragment(fragment)
