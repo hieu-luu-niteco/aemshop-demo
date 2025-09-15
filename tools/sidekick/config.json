@@ -18,7 +18,7 @@
       "id": "asset-library",
       "title": "AEM Assets",
       "environments": [
-      "edit","dev"
+      "edit"
       ],      
       "url": "https://experience.adobe.com/solutions/CQ-helix-assets-addon/static-assets/resources/asset-selector.html",
       "isPalette": true,

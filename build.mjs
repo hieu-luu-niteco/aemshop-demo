@@ -14,6 +14,38 @@ overrideGQLOperations([
   },
   // {
   //   npm: '@dropins/storefront-checkout',
+  //   operations: [     
+  //       `
+  //     fragment SHIPPING_CART_ADDRESS_FRAGMENT on ShippingCartAddress {
+  //       id
+  //       available_shipping_methods {
+  //         carrier_code
+  //         carrier_title
+  //         method_code
+  //         method_title
+  //         amount { value currency }
+  //         available
+  //         price_excl_tax { value currency }
+  //         price_incl_tax { value currency }          
+  //         oope_carrier_config {
+  //           tracking_available
+  //           shipping_labels_available
+  //           sort_order
+  //         }
+  //       }
+  //       selected_shipping_method {
+  //         carrier_code
+  //         carrier_title
+  //         method_code
+  //         method_title
+  //         amount { value currency }
+  //       }
+  //     }
+  //     `,
+  //   ],
+  // },
+  // {
+  //   npm: '@dropins/storefront-checkout',
   //   operations: [],
   // },
   // {

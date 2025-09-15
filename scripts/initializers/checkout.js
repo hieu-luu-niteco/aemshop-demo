@@ -14,5 +14,18 @@ await initializeDropin(async () => {
     },
   };
 
-  return initializers.mountImmediately(initialize, { langDefinitions });
+  //return initializers.mountImmediately(initialize, { langDefinitions });
+  return initializers.mountImmediately(initialize, {
+      langDefinitions,
+      models: {
+        CartModel: {
+            transformer: (data) => {
+              return {
+                  availablePaymentMethods: data?.available_payment_methods,
+                  selectedPaymentMethod: data?.selected_payment_method,
+              };
+            },
+        },
+      },
+  });
 })();

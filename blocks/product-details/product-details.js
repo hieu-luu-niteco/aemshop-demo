@@ -10,6 +10,9 @@ import { tryRenderAemAssetsImage } from '@dropins/tools/lib/aem/assets.js';
 import * as pdpApi from '@dropins/storefront-pdp/api.js';
 import { render as pdpRendered } from '@dropins/storefront-pdp/render.js';
 import { render as wishlistRender } from '@dropins/storefront-wishlist/render.js';
+import { render as CartProvider } from '@dropins/storefront-cart/render.js';
+
+import GiftOptions from '@dropins/storefront-cart/containers/GiftOptions.js';
 
 import { WishlistToggle } from '@dropins/storefront-wishlist/containers/WishlistToggle.js';
 import { WishlistAlert } from '@dropins/storefront-wishlist/containers/WishlistAlert.js';
@@ -49,6 +52,9 @@ function updateAddToCartButtonText(addToCartInstance, inCart, labels) {
   }
 }
 
+
+
+
 export default async function decorate(block) {
   const product = events.lastPayload('pdp/data') ?? null;
   const labels = await fetchPlaceholders();
@@ -70,7 +76,7 @@ export default async function decorate(block) {
       <div class="product-details__right-column">
         <div class="product-details__header"></div>
         <div class="product-details__price"></div>
-        <div class="product-details__gallery"></div>
+        <div class="product-details__gallery"></div>        
         <div class="product-details__short-description"></div>
         <div class="product-details__configuration">
           <div class="product-details__options"></div>
@@ -80,6 +86,7 @@ export default async function decorate(block) {
             <div class="product-details__buttons__add-to-wishlist"></div>
           </div>
         </div>
+        <div class="product-details__test"></div>
         <div class="product-details__description"></div>
         <div class="product-details__attributes"></div>
       </div>
@@ -98,6 +105,8 @@ export default async function decorate(block) {
   const $wishlistToggleBtn = fragment.querySelector('.product-details__buttons__add-to-wishlist');
   const $description = fragment.querySelector('.product-details__description');
   const $attributes = fragment.querySelector('.product-details__attributes');
+  const $test = fragment.querySelector('.product-details__test');
+
 
   block.appendChild(fragment);
 
@@ -248,7 +257,7 @@ export default async function decorate(block) {
           const { addProductsToCart } = await import(
             '@dropins/storefront-cart/api.js'
           );
-          await addProductsToCart([{ ...values }]);
+          await addProductsToCart([{ ...values }]);          
         }
 
         // reset any previous alerts if successful
@@ -355,6 +364,10 @@ export default async function decorate(block) {
       setMetaTags(product);
       document.title = product.name;
     }
+    const $tableBordered = document.querySelector('.table.bordered.block');
+      if ($tableBordered) {
+        $test.appendChild($tableBordered);
+      }
   }, { eager: true });
 
   return Promise.resolve();

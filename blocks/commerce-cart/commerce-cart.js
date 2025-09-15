@@ -33,6 +33,18 @@ import { readBlockConfig } from '../../scripts/aem.js';
 import { rootLink, fetchPlaceholders } from '../../scripts/commerce.js';
 
 export default async function decorate(block) {
+  const DROPDOWN_MAX_QUANTITY = 20;
+
+  const dropdownOptions = Array.from(
+    { length: parseInt(DROPDOWN_MAX_QUANTITY, 10) },
+    (_, i) => {
+        const quantityOption = i + 1;
+        return {
+          value: `${quantityOption}`,
+          text: `${quantityOption}`,
+        };
+    }
+  );
   // Configuration
   const {
     'hide-heading': hideHeading = 'false',
@@ -44,6 +56,8 @@ export default async function decorate(block) {
     'start-shopping-url': startShoppingURL = '',
     'checkout-url': checkoutURL = '',
     'enable-updating-product': enableUpdatingProduct = 'false',
+    'show-discount': showDiscount = 'false',
+    'show-savings': showSavings = 'false',
   } = readBlockConfig(block);
 
   const placeholders = await fetchPlaceholders();
@@ -99,6 +113,10 @@ export default async function decorate(block) {
   await Promise.all([
     // Cart List
     provider.render(CartSummaryList, {
+      quantityType: 'dropdown',
+      dropdownOptions,
+      showDiscount: showDiscount === 'true',
+      showSavings: showSavings === 'true',
       hideHeading: hideHeading === 'true',
       routeProduct: getProductLink,
       routeEmptyCartCTA: startShoppingURL ? () => rootLink(startShoppingURL) : undefined,
@@ -114,6 +132,8 @@ export default async function decorate(block) {
           const anchorWrapper = document.createElement('a');
           anchorWrapper.href = getProductLink(item);
 
+          console.log("anchorWrapper.href", anchorWrapper.href);
+
           tryRenderAemAssetsImage(ctx, {
             alias: item.sku,
             imageProps: defaultImageProps,
@@ -126,7 +146,36 @@ export default async function decorate(block) {
           });
         },
 
+        ProductAttributes: (ctx) => {
+          // Prepend Product Attributes
+          const ProductAttributes = ctx.item?.productAttributes;
+
+          console.log("ProductAttributes",  ProductAttributes);
+     
+          ProductAttributes?.forEach((attr) => {
+            if(attr.code === "shipping_notes") {
+              if(attr.selected_options) {
+                const selectedOptions = attr.selected_options
+                .filter((option) => option.label.trim() !== '')
+                .map((option) => option.label)
+                .join(', ');
+     
+                if(selectedOptions) {
+                  const productAttribute = document.createElement('div');
+                  productAttribute.innerText = `${attr.code}: ${selectedOptions}`;
+                  ctx.appendChild(productAttribute);
+                }
+              } else if (attr.value) {
+                const productAttribute = document.createElement('div');
+                productAttribute.innerText = `${attr.code}: ${attr.value}`;
+                ctx.appendChild(productAttribute);
+              }
+            }
+          })
+        },
+
         Footer: (ctx) => {
+
           // Edit Link
           if (ctx.item?.itemType === 'ConfigurableCartItem' && enableUpdatingProduct === 'true') {
             const editLink = document.createElement('div');
@@ -187,6 +236,25 @@ export default async function decorate(block) {
           })(giftOptions);
 
           ctx.appendChild(giftOptions);
+
+          
+        },
+
+        Footer: (ctx) => {
+          // Runs on mount
+          const wrapper = document.createElement('div');
+          ctx.appendChild(wrapper);
+     
+          // Append Product Promotions on every update
+          ctx.onChange((next) => {
+            wrapper.innerHTML = '';     
+            next.item?.discount?.label?.forEach((label) => {
+              const discount = document.createElement('div');
+              discount.style.color = '#3d3d3d';
+              discount.innerText = label;
+              wrapper.appendChild(discount);
+              });
+            });
         },
       },
     })($list),

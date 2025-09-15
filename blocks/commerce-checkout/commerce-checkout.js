@@ -1039,7 +1039,7 @@ export default async function decorate(block) {
   events.on('checkout/initialized', handleCheckoutInitialized, { eager: true });
   events.on('checkout/updated', handleCheckoutUpdated);
   events.on('checkout/values', handleCheckoutValues);
-  events.on('order/placed', handleOrderPlaced);
+  events.on('order/placed', handleOrderPlaced);  
 }
 
 function swatchImageSlot(ctx) {
